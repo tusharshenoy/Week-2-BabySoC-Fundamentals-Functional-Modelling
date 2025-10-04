@@ -1,4 +1,4 @@
-# 🎓 Understanding SoC Design Fundamentals Through VSDBabySoC
+# 🎓 Week-2-BabySoC-Fundamentals-Functional-Modelling
 
 <div align="center">
 
@@ -13,42 +13,43 @@
 ## 📜 Table of Contents
 
 1. [Introduction](#id1)
-2. [What is a System-on-Chip (SoC)?](#what-is-a-system-on-chip-soc)
-3. [Components of a Typical SoC](#components-of-a-typical-soc)
+2. [What is a System-on-Chip (SoC)?](#id2)
+3. [Components of a Typical SoC](#id3)
 
-   * [Central Processing Unit (CPU)](#central-processing-unit-cpu)
-   * [Memory Subsystem](#memory-subsystem)
-   * [Graphics Processing Unit (GPU)](#graphics-processing-unit-gpu)
-   * [Digital Signal Processor (DSP)](#digital-signal-processor-dsp)
-   * [I/O Interfaces](#inputoutput-io-interfaces)
-   * [Power Management Units](#power-management-units)
-   * [Special Features](#special-features)
-4. [Why SoCs Are Important](#why-socs-are-important)
-5. [Types of SoCs](#types-of-socs)
-6. [SoC Design Flow](#soc-design-flow)
-7. [Introduction to BabySoC](#introduction-to-babysoc)
-8. [VSDBabySoC Architecture](#vsdbabysoc-architecture)
-
-   * [RVMYTH CPU](#rvmyth-cpu)
-   * [Phase-Locked Loop (PLL)](#phase-locked-loop-pll)
-   * [Digital-to-Analog Converter (DAC)](#digital-to-analog-converter-dac)
+   * [Central Processing Unit (CPU)](#id3.1)
+   * [Memory Subsystem](#id3.2)
+   * [Graphics Processing Unit (GPU)](#id3.3)
+   * [Digital Signal Processor (DSP)](#id3.4)
+   * [I/O Interfaces](#id3.5)
+   * [Power Management Units](#id3.6)
+   * [Special Features](#id3.7)
      
-9. [Functional Modelling in SoC Design](#functional-modelling-in-soc-design)
-10. [Learning Outcomes from BabySoC](#learning-outcomes-from-babysoc)
-11. [Practical Applications](#practical-applications)
-12. [Connection to Professional Practice](#connection-to-professional-practice)
-13. [VSDBabySoC – A Tiny RISC-V System-on-Chip](#vsdbabysoc-architecture)
-14. [Project Structure](#project-structure)
-15. [Setup & TL-Verilog Conversion](#🛠️-setup--tl-verilog-conversion)
-16. [Simulation Flow](#🧪-simulation-flow)
-17. [Pre-Synthesis Simulation](#pre-synthesis-simulation)
-18. [Post-Synthesis Simulation](#post-synthesis-simulation)
-19. [Key Signals to Observe](#key-signals-to-observe)
-20. [Instruction Program Driving BabySoC](#🔄-instruction-program-driving-babysoc)
-21. [Execution Timeline](#execution-timeline)
-22. [Troubleshooting](#🛠️-troubleshooting)
-23. [Summary](#💡-summary)
-24. [References](#📚-references)
+4. [Why SoCs Are Important](#id4)
+5. [Types of SoCs](#id5)
+6. [SoC Design Flow](#id6)
+7. [Introduction to BabySoC](#id7)
+8. [VSDBabySoC Architecture](#id8)
+
+   * [RVMYTH CPU](#id8.1)
+   * [Phase-Locked Loop (PLL)](#id8.2)
+   * [Digital-to-Analog Converter (DAC)](#id8.3)
+     
+9. [Functional Modelling in SoC Design](#id9)
+10. [Learning Outcomes from BabySoC](#id10)
+11. [Practical Applications](#id11)
+12. [Connection to Professional Practice](#id12)
+13. [VSDBabySoC – A Tiny RISC-V System-on-Chip](#id13)
+14. [Project Structure](#id14)
+15. [Setup & TL-Verilog Conversion](#id15)
+16. [Simulation Flow](#id16)
+17. [Pre-Synthesis Simulation](#id17)
+18. [Post-Synthesis Simulation](#id18)
+19. [Key Signals to Observe](#id19)
+20. [Instruction Program Driving BabySoC](#id20)
+21. [Execution Timeline](#id21)
+22. [Troubleshooting](#id22)
+23. [Summary](#id23)
+24. [References](#id24)
 
 <br>
 
@@ -69,6 +70,7 @@ The project provides **hands-on experience** with digital, analog, and mixed-sig
 
 <br>
 
+<a id="id2"></a>
 ## 🤔 What is a System-on-Chip (SoC)?
 
 A **System-on-Chip (SoC)** integrates all essential computing components into a **single silicon die**, replacing multi-chip board-level designs. Instead of connecting discrete chips for CPU, GPU, memory, I/O, and peripherals, a modern SoC consolidates them, yielding:
