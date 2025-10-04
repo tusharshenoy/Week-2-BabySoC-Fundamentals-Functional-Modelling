@@ -1,348 +1,320 @@
-# Week-2-BabySoC-Fundamentals-Functional-Modelling
-
-
-## 🎓 BabySoC – Learning-Oriented RISC-V System-on-Chip (SoC)
+# 🎓 Understanding SoC Design Fundamentals Through VSDBabySoC
 
 <div align="center">
-  
+
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![RISC-V](https://img.shields.io/badge/Architecture-RISC--V-orange?style=flat-square)](https://riscv.org/)
 [![Sky130](https://img.shields.io/badge/Process-Sky130-green)](https://skywater-pdk.readthedocs.io/)
 
 </div>
 
+<br>
+
 ## 📜 Table of Contents
 
-1. [Introduction](#introduction)
+1. [Introduction](#id1)
 2. [What is a System-on-Chip (SoC)?](#what-is-a-system-on-chip-soc)
 3. [Components of a Typical SoC](#components-of-a-typical-soc)
 
-   * [CPU](#central-processing-unit-cpu)
-   * [Memory](#memory-subsystem)
+   * [Central Processing Unit (CPU)](#central-processing-unit-cpu)
+   * [Memory Subsystem](#memory-subsystem)
+   * [Graphics Processing Unit (GPU)](#graphics-processing-unit-gpu)
+   * [Digital Signal Processor (DSP)](#digital-signal-processor-dsp)
    * [I/O Interfaces](#inputoutput-io-interfaces)
-   * [GPU](#graphics-processing-unit-gpu)
-   * [DSP](#digital-signal-processor-dsp)
    * [Power Management Units](#power-management-units)
    * [Special Features](#special-features)
 4. [Why SoCs Are Important](#why-socs-are-important)
 5. [Types of SoCs](#types-of-socs)
-6. [Introduction to BabySoC](#introduction-to-babysoc)
-7. [BabySoC Architecture](#babysoc-architecture)
+6. [SoC Design Flow](#soc-design-flow)
+7. [Introduction to BabySoC](#introduction-to-babysoc)
+8. [VSDBabySoC Architecture](#vsdbabysoc-architecture)
 
    * [RVMYTH CPU](#rvmyth-cpu)
    * [Phase-Locked Loop (PLL)](#phase-locked-loop-pll)
    * [Digital-to-Analog Converter (DAC)](#digital-to-analog-converter-dac)
-8. [Functional Modelling in SoC Design](#functional-modelling-in-soc-design)
-9. [Learning Outcomes from BabySoC](#learning-outcomes-from-babysoc)
-10. [GitHub Showcase](#github-showcase)
-11. [References](#references)
+     
+9. [Functional Modelling in SoC Design](#functional-modelling-in-soc-design)
+10. [Learning Outcomes from BabySoC](#learning-outcomes-from-babysoc)
+11. [Practical Applications](#practical-applications)
+12. [Connection to Professional Practice](#connection-to-professional-practice)
+13. [VSDBabySoC – A Tiny RISC-V System-on-Chip](#vsdbabysoc-architecture)
+14. [Project Structure](#project-structure)
+15. [Setup & TL-Verilog Conversion](#🛠️-setup--tl-verilog-conversion)
+16. [Simulation Flow](#🧪-simulation-flow)
+17. [Pre-Synthesis Simulation](#pre-synthesis-simulation)
+18. [Post-Synthesis Simulation](#post-synthesis-simulation)
+19. [Key Signals to Observe](#key-signals-to-observe)
+20. [Instruction Program Driving BabySoC](#🔄-instruction-program-driving-babysoc)
+21. [Execution Timeline](#execution-timeline)
+22. [Troubleshooting](#🛠️-troubleshooting)
+23. [Summary](#💡-summary)
+24. [References](#📚-references)
 
 <br>
 
+<a id="id1"></a>
 ## 🌟 Introduction
 
-**BabySoC** is a **compact, educational System-on-Chip** that simplifies SoC concepts while retaining **real-world functionality**. Designed around the **RISC-V RVMYTH core**, it includes a **Phase-Locked Loop (PLL)** for precise clock control and a **10-bit Digital-to-Analog Converter (DAC)** for analog interfacing.
+**VSDBabySoC** is a **compact educational System-on-Chip** designed to teach **fundamental SoC concepts** while retaining **real-world functionality**. It integrates:
 
-The project’s primary goal is to provide a **highly documented learning platform**, bridging theoretical concepts of SoC design with practical implementation. BabySoC is perfect for:
+* 🧠 **RVMYTH CPU Core** – A synthesizable 32-bit RISC-V processor
+* ⏱️ **Phase-Locked Loop (PLL)** – Ensures stable clocking and synchronization
+* 🎚 **10-bit DAC** – Bridges digital computation to analog output
 
-* Students exploring digital design and SoC architecture
-* Engineers learning functional modelling before RTL and physical design
-* Understanding digital-to-analog interfacing
+The project provides **hands-on experience** with digital, analog, and mixed-signal design, functional modeling, and SoC integration. It is perfect for:
+
+* Students learning **CPU, memory, and peripheral interactions**
+* Engineers exploring **functional modeling before RTL and physical design**
+* Understanding **clock distribution, analog interfacing, and pipeline design**
 
 <br>
 
 ## 🤔 What is a System-on-Chip (SoC)?
 
-A **System-on-Chip (SoC)** is essentially a **mini-computer integrated into a single silicon die**, combining multiple functional units into one compact design.
-It combines:
+A **System-on-Chip (SoC)** integrates all essential computing components into a **single silicon die**, replacing multi-chip board-level designs. Instead of connecting discrete chips for CPU, GPU, memory, I/O, and peripherals, a modern SoC consolidates them, yielding:
 
-* **CPU** – Central Processing Unit
-* **Memory** – RAM, ROM/Flash
-* **I/O Interfaces** – USB, sensors, displays
-* **GPU/DSP** – Graphics & signal processing
-* **Power Management** – Efficient energy usage
-* **Connectivity** – Wi-Fi, Bluetooth, 5G, secure data links
+* **Compact Size:** Fits complex systems in packages smaller than a fingernail
+* **Energy Efficiency:** On-chip communication drastically reduces power
+* **High Performance:** Low-latency connections between components
+* **Cost Savings:** Fewer parts, simpler boards, lower assembly/test costs
+* **Reliability:** Fewer connectors reduce failure points
 
-This integration enables **compact, energy-efficient, high-performance, and cost-effective** devices like smartphones, wearables, IoT gadgets, and embedded systems.
+💡 **Analogy:** An SoC is like a **self-sustaining smart city**:
 
+| SoC Component | City Analogy                          |
+| ------------- | ------------------------------------- |
+| CPU           | City Hall (decision-making)           |
+| Memory        | Library (knowledge storage)           |
+| I/O           | Roads & Highways (data transport)     |
+| GPU           | Art District (visual creativity)      |
+| DSP           | Concert Hall (signal processing)      |
+| Power Mgmt.   | Power Station (energy supply)         |
+| Connectivity  | Airports/Ports (global communication) |
 
-## 🎯 Why SoCs?
-
-| Feature                  | Benefit                                             |
-| ------------------------ | --------------------------------------------------- |
-| 📦 **Compactness**       | Ideal for mobile & embedded devices                 |
-| 🔋 **Energy Efficiency** | Extends battery life in wearables, IoT, smartphones |
-| ⚡ **High Performance**   | Reduced latency with on-chip communication          |
-| 💰 **Cost-Effective**    | Single chip replaces multiple discrete components   |
-| **Reliable**         | Fewer discrete components mean fewer points of failure.                     |
-
-💡 **Analogy:** Think of an SoC as a self-sustaining smart city 🏙️
-
-| SoC Component | Analogy                                  |
-| ------------- | ---------------------------------------- |
-| CPU           | City Hall (decision-making)              |
-| Memory        | Library (knowledge storage)              |
-| I/O           | Roads & Highways (data transport)        |
-| GPU           | Art District (visual creativity)         |
-| DSP           | Concert Hall (audio & signal processing) |
-| Power Mgmt.   | Power Station (energy supply)            |
-| Connectivity  | Airports/Ports (global communication)    |
-
-
-**Applications:**
-
-* Smartphones & Tablets
-* Smartwatches & Wearables
-* IoT Devices
-* Embedded Systems in Cars, TVs, Home Appliances
-
-**Challenges:**
-
-* Complex design integration
-* Thermal management due to dense packing
-* Limited post-fabrication flexibility
-
-<div align="center">
-  
-<img src="https://github.com/user-attachments/assets/ff01a02e-f2ad-40b2-bc79-94aa4f025a2e" alt="generated-image" width="500" height="350"/>
-
-
-</div>
+**Applications:** Smartphones, tablets, wearables, IoT devices, automotive embedded systems.
+**Challenges:** Thermal management, design complexity, limited flexibility post-fabrication.
 
 <br>
 
 ## 🛠️ Components of a Typical SoC
 
-A SoC integrates multiple specialized components. Understanding these is crucial for grasping BabySoC’s architecture.
+### Central Processing Unit (CPU)
 
-### 1️⃣ Central Processing Unit (CPU)
+* **Core of computation:** Executes instructions, handles memory and I/O
+* **Heterogeneous architecture:** High-performance + energy-efficient cores
+* **BabySoC Implementation:** RVMYTH CPU, a simple, synthesizable 32-bit RISC-V processor for education
 
-* **Brain of the SoC** – executes instructions, controls peripherals, and manages memory.
-* **Responsibilities:** Instruction execution, arithmetic operations, memory and I/O management.
-
-**BabySoC Implementation:** **RVMYTH CPU**, a simple, open-source RISC-V core for learning CPU design and instruction execution.
-
-<br>
-
-### 2️⃣ Memory Subsystem
-
-* **RAM (Random Access Memory):** Temporary storage for runtime data.
-* **ROM / Flash Memory:** Non-volatile storage for program code.
-
-Memory design affects **speed, power, and area**, making it a critical SoC component.
+**Key Learning:** Instruction execution, register file architecture, pipeline hazards, and I/O interfacing.
 
 <br>
 
-### 3️⃣ Input/Output (I/O) Interfaces
+### Memory Subsystem
 
-* Enables communication with **external devices**: USB, SPI, UART, GPIO.
-* **Analog I/O:** DACs or ADCs.
+* **On-chip Cache:** Reduces latency, critical for performance
+* **Memory Controllers:** Manage DRAM protocols, refresh cycles, error correction
+* **ROM / Flash:** Store bootloader, firmware, and persistent program code
 
-**BabySoC** includes a **10-bit DAC**, allowing interaction with external analog devices (TVs, speakers, etc.).
-
-<br>
-
-### 4️⃣ Graphics Processing Unit (GPU)
-
-* Handles **image and video rendering**.
-* While BabySoC does not integrate a GPU, understanding GPU roles is essential for multimedia SoCs.
+**Key Learning:** Memory hierarchies, access timing, and interface protocols.
 
 <br>
 
-### 5️⃣ Digital Signal Processor (DSP)
+### Graphics Processing Unit (GPU)
 
-* Optimized for **audio/video signal processing**.
-* Performs filtering, Fourier transforms, and noise reduction.
-
-<br>
-
-### 6️⃣ Power Management Units (PMU)
-
-* Efficiently manages **energy consumption**.
-* Ensures battery-powered devices maximize lifespan.
+* Handles **parallel processing** for image/video rendering
+* Useful for general-purpose parallel workloads (AI, physics simulations)
+* BabySoC does not include a GPU, but understanding its function is crucial in modern SoCs.
 
 <br>
 
-### 7️⃣ Special Features
+### Digital Signal Processor (DSP)
 
-* Wi-Fi / Bluetooth controllers
-* Security modules
-* Application-specific accelerators
-
-BabySoC focuses on **core learning**, but these features illustrate modern SoC complexity.
+* Optimized for **signal processing**: audio, video, communications
+* Performs filtering, FFT, noise reduction efficiently
+* Exposes students to domain-specific accelerators in SoCs.
 
 <br>
 
-## 🌈 Why SoCs Are Important
+### Input/Output (I/O) Interfaces
 
-* Integrates multiple functionalities in a single chip
-* Reduces cost and size
-* Enables portable devices
-* Enhances performance and energy efficiency
+* Digital interfaces: UART, SPI, I2C, GPIO
+* Analog interfaces: DACs, ADCs for real-world signals
+* BabySoC includes a **10-bit DAC** for analog output
+
+<br>
+
+### Power Management Units (PMU)
+
+* Optimizes energy consumption
+* Supports **clock gating, dynamic voltage/frequency scaling (DVFS)**
+* Ensures battery-powered devices last longer
+
+<br>
+
+### Special Features
+
+* Connectivity: Wi-Fi, Bluetooth
+* Security: Encryption, authentication modules
+* Accelerators: AI, cryptography, video codecs
+* BabySoC focuses on fundamentals, but these features show modern SoC complexity.
+
+<br>
+
+## 🎯 Why SoCs Are Important
+
+| Feature              | Benefit                               |
+| -------------------- | ------------------------------------- |
+| 📦 Compactness       | Mobile & embedded devices             |
+| 🔋 Energy Efficiency | Extended battery life                 |
+| ⚡ High Performance   | Reduced latency and faster processing |
+| 💰 Cost-Effective    | Replaces multiple discrete components |
+| ✅ Reliable           | Fewer points of failure               |
 
 <br>
 
 ## 🧩 Types of SoCs
 
-1. **Microcontroller-based SoC** → Small-scale, low-power control (IoT nodes, appliances)
-2. **Microprocessor-based SoC** → Runs OS, multitasking (smartphones, tablets)
-3. **Application-Specific SoC (ASIC)** → Domain-optimized for AI accelerators, automotive, networking
+1. **Microcontroller-based:** Low-power, small-scale control
+2. **Microprocessor-based:** Runs OS, multitasking (smartphones, tablets)
+3. **Application-Specific SoC (ASIC):** Domain-optimized for AI, automotive, networking
 
 <br>
 
 ## 🌀 SoC Design Flow
 
-SoC design progresses through:
+1. **Architectural Specification:** Define system goals, performance, interfaces
+2. **Functional Modeling:** High-level behavioral validation (C++, SystemC, Python, MATLAB)
+3. **RTL Design:** Synthesizable implementation in Verilog/VHDL
+4. **Verification:** Simulation, formal verification, test coverage analysis
+5. **Synthesis:** Convert RTL to gate-level netlist
+6. **Physical Design:** Placement, routing, timing closure
+7. **Fabrication & Testing:** Validate silicon against specs
 
-1. **Functional Modeling:** Early validation of system behavior; focuses on *what the system should do* rather than hardware specifics.
-2. **RTL Design:** Implementation in Verilog/VHDL; describes registers, datapaths, and control logic.
-3. **Physical Design:** Synthesis, placement, routing, and fabrication (e.g., Sky130 process).
-
-Functional modeling is critical for avoiding design errors before committing to silicon.
-
-BabySoC is a **learning-oriented microprocessor-based SoC**, simplified for educational use.
-
-<br>
-
-
-## 👶 VSDBabySoC – A Tiny but Powerful RISC-V SoC
-
-### 🌟 Introduction
-
-**VSDBabySoC** is a compact educational SoC built around:
-
-* 🧠 **RVMYTH CPU Core** – A lightweight RISC-V processor
-* ⏱️ **8× PLL** – Generates a stable internal clock
-* 🎚 **10-bit DAC** – Converts digital values to analog output
-
-It enables hands-on learning of:
-
-* CPU instruction execution
-* Clock synchronization using PLL
-* Digital-to-analog interfacing
+**Functional Modeling:** Key to validating design early, reducing costly late-stage errors.
 
 <br>
 
-### 🧩 VSDBabySoC Architecture
+## 👶 Introduction to BabySoC
 
-**Block Diagram (Conceptual)**
+**VSDBabySoC** is an **educational, simplified RISC-V SoC**, including:
+
+* RVMYTH CPU – a functional 32-bit RISC-V processor
+* 8× PLL – stable, high-frequency clock generation
+* 10-bit DAC – analog output for tangible results
+
+Designed for **learning-by-doing**, it exposes students to CPU design, clocking, and digital-to-analog conversion in a minimal, manageable platform.
+
+<br>
+
+## 🧩 VSDBabySoC Architecture
 
 ```
-[ Instruction Memory ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → Analog OUT
-                                ↑
-                                |
-                               [PLL]
+Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → Analog Output
 ```
 
-**Component Details:**
+**Component Roles:**
 
-| Component  | Role                                             |
-| ---------- | ------------------------------------------------ |
-| RVMYTH CPU | Executes instructions, drives register r17       |
-| PLL        | Generates stable clock for CPU and DAC           |
-| DAC        | Converts 10-bit digital values to analog voltage |
+| Component  | Functionality                                             |
+| ---------- | --------------------------------------------------------- |
+| RVMYTH CPU | Executes instructions, drives r17 register for DAC output |
+| PLL        | Generates high-speed, stable system clock                 |
+| DAC        | Converts 10-bit digital values to analog voltage          |
 
 💡 **Analogy:** CPU = brain, PLL = heartbeat, DAC = voice
 
 <br>
 
-**VSDBabySoC** integrates:
-
-* **RVMYTH RISC-V CPU**
-* **8x Phase-Locked Loop (PLL)** for stable clocking
-* **10-bit DAC** for analog output
-
-### Goals:
-
-1. Enable **simultaneous testing** of multiple open-source IPs
-2. Validate **clock synchronization** via PLL
-3. Demonstrate **digital-to-analog interfacing**
-
-<br>
-
-## 🏗️ BabySoC Architecture
-
-<div align="center">
-<img width="2270" height="1260" alt="vsdbabysoc_block_diagram" src="https://github.com/user-attachments/assets/3f59c535-b6dd-4cb6-a823-6861b075678c" />
-
-</div>
-
 ### RVMYTH CPU
 
-* **Instruction execution & control unit**
-* **Register r17** cycles digital data to DAC
-* Enables continuous **digital-to-analog conversion**
+* **Pipeline-based, 32 registers (RISC-V spec)**
+* Executes arithmetic, logic, load/store, branch instructions
+* Drives **r17 register** for DAC output
+* Demonstrates **instruction execution, register management, and I/O interfacing**
 
 <br>
 
 ### Phase-Locked Loop (PLL)
 
-<div align="center">
-<img width="1205" height="712" alt="image" src="https://github.com/user-attachments/assets/55b1a29f-da13-4f4e-8fc6-6afffe94175e" />
-
-</div>
-
-**PLL Components:**
-
-1. **Phase Detector:** Compares reference and output phase
-2. **Loop Filter:** Converts phase error to control voltage
-3. **Voltage-Controlled Oscillator (VCO):** Adjusts frequency
-
-**Why PLL?**
-
-* Minimize clock jitter
-* Different frequencies for CPU & peripherals
-* Compensate for crystal inaccuracies
-* Reduce timing errors in high-speed circuits
+* **Generates stable clock** at 8× reference frequency
+* Components: Phase Frequency Detector, Charge Pump, VCO, Frequency Divider
+* **Benefits:** Reduces jitter, supports multiple frequencies, compensates for temperature/voltage variations
 
 <br>
 
 ### Digital-to-Analog Converter (DAC)
 
-<div align="center">
-<img width="934" height="209" alt="image" src="https://github.com/user-attachments/assets/db34c06f-8740-48ac-a88e-1110b7d09935" />
-  
-  <br>
-  
-<img width="1344" height="768" alt="generated-image (2)" src="https://github.com/user-attachments/assets/6ef5f85a-99ab-49db-b519-ac398edac059" />
-
-</div>
-
-* Converts **digital CPU output** to **analog signal**
-* **10-bit DAC:** Supports 1024 discrete levels
-* Interfaces with external devices (speakers, displays)
-* Supports **R-2R Ladder or Weighted Resistor DAC topologies**
+* **10-bit resolution (1024 levels)**
+* Implements **R-2R Ladder network** for accurate, scalable conversion
+* Converts CPU output into measurable analog signals
+* Introduces **mixed-signal design considerations:** noise, reference stability, layout precision
 
 <br>
 
 ## 🧪 Functional Modelling in SoC Design
 
-**Before RTL and physical design**, functional modelling helps:
+**Purpose:** Early validation before RTL and physical design.
 
 * Verify system behavior
-* Debug data flow & control logic
-* Test clock & analog interfacing
+* Analyze CPU instruction execution
+* Simulate PLL locking and DAC output
+* Identify timing, interface, and data flow issues
 
-**BabySoC Examples:**
-
-* Simulate PLL clock stability
-* DAC output waveform verification
-* CPU instruction execution and data flow
-
-Functional modelling **reduces errors**, saves design iterations, and improves learning outcomes.
+**Benefits:** Reduces errors, accelerates learning, provides a **golden reference** for RTL verification.
 
 <br>
 
 ## 🎯 Learning Outcomes from BabySoC
 
-1. CPU instruction and register manipulation
-2. Clock synchronization with PLLs
-3. Digital-to-analog conversion fundamentals
-4. Integration of heterogeneous SoC components
-5. Importance of functional modelling
+1. Understanding **CPU pipeline, registers, and instruction flow**
+2. Mastering **clocking and PLL design principles**
+3. Exploring **digital-to-analog conversion techniques**
+4. Integrating **heterogeneous SoC components**
+5. Applying **functional modeling** to validate systems
 
 <br>
 
+## ⚡ Practical Applications
+
+* **Signal Generation:** Test patterns for analog circuits
+* **Control Systems:** Generate control voltages
+* **Algorithm Development:** DSP, waveform synthesis
+* **Research Platform:** Explore PLL/DAC variations, low-power techniques
+
+<br>
+
+## 🏭 Connection to Professional Practice
+
+* Interfacing CPU with peripherals
+* Managing **clock distribution**
+* Handling **mixed-signal challenges**
+* Following **systematic design flows**
+* Making **architecture vs. implementation trade-offs**
+* Using HDL and **EDA tools** for design, synthesis, and analysis
+
+<br>
+
+## 🏁 Conclusion
+
+VSDBabySoC
+
+
+provides a **foundational, hands-on platform** for understanding SoC design, spanning **digital, analog, and mixed-signal domains**.
+
+By learning:
+
+* How the **PLL generates stable timing**
+* How the **RISC-V CPU executes instructions**
+* How the **DAC converts digital output to analog signals**
+
+…students gain insights directly applicable to **real-world SoC design**, from microcontrollers to application processors and specialized accelerators.
+
+Mastering these **fundamental concepts** in a manageable platform prepares learners for the **complex SoCs powering modern technology**.
+
+
+
+
+<br>
+
+## 🧩 VSDBabySoC Architecture
 
 ## 📂 Project Structure
 
