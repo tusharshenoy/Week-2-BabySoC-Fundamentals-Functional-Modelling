@@ -272,7 +272,7 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 
 <img width="934" height="209" alt="Screenshot from 2025-10-04 21-29-15" src="https://github.com/user-attachments/assets/3f224bc7-6e82-47ba-beb8-10f8727b0626" />
 
-<img width="836" height="471" alt="Screenshot from 2025-10-04 21-29-33" src="https://github.com/user-attachments/assets/15b74a24-bfe1-4299-a061-acb917153d3e" />
+<img width="1344" height="768" alt="generated-image (2)" src="https://github.com/user-attachments/assets/f3f7d6f2-5c67-42ef-b88d-90a2bd79d220" />
 
 
 <br>
