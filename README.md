@@ -49,7 +49,8 @@
 21. [Execution Timeline](#id21)
 22. [Troubleshooting](#id22)
 23. [Summary](#id23)
-24. [References](#id24)
+24. [Conclusion](#id23.1)
+25. [References](#id24)
 
 <br>
 
@@ -98,8 +99,10 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id3"></a>
 ## 🛠️ Components of a Typical SoC
 
+<a id="id3.1"></a>
 ### Central Processing Unit (CPU)
 
 * **Core of computation:** Executes instructions, handles memory and I/O
@@ -110,6 +113,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id3.2"></a>
 ### Memory Subsystem
 
 * **On-chip Cache:** Reduces latency, critical for performance
@@ -120,6 +124,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id3.3"></a>
 ### Graphics Processing Unit (GPU)
 
 * Handles **parallel processing** for image/video rendering
@@ -128,6 +133,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id3.4"></a>
 ### Digital Signal Processor (DSP)
 
 * Optimized for **signal processing**: audio, video, communications
@@ -136,6 +142,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id3.5"></a>
 ### Input/Output (I/O) Interfaces
 
 * Digital interfaces: UART, SPI, I2C, GPIO
@@ -144,6 +151,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id3.6"></a>
 ### Power Management Units (PMU)
 
 * Optimizes energy consumption
@@ -152,6 +160,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id3.7"></a>
 ### Special Features
 
 * Connectivity: Wi-Fi, Bluetooth
@@ -161,6 +170,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id4"></a>
 ## 🎯 Why SoCs Are Important
 
 | Feature              | Benefit                               |
@@ -173,6 +183,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id5"></a>
 ## 🧩 Types of SoCs
 
 1. **Microcontroller-based:** Low-power, small-scale control
@@ -181,6 +192,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id6"></a>
 ## 🌀 SoC Design Flow
 
 1. **Architectural Specification:** Define system goals, performance, interfaces
@@ -195,6 +207,7 @@ A **System-on-Chip (SoC)** integrates all essential computing components into a 
 
 <br>
 
+<a id="id7"></a>
 ## 👶 Introduction to BabySoC
 
 **VSDBabySoC** is an **educational, simplified RISC-V SoC**, including:
@@ -207,6 +220,7 @@ Designed for **learning-by-doing**, it exposes students to CPU design, clocking,
 
 <br>
 
+<a id="id8"></a>
 ## 🧩 VSDBabySoC Architecture
 
 ```
@@ -225,6 +239,7 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 
 <br>
 
+<a id="id8.1"></a>
 ### RVMYTH CPU
 
 * **Pipeline-based, 32 registers (RISC-V spec)**
@@ -234,23 +249,35 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 
 <br>
 
+<a id="id8.2"></a>
 ### Phase-Locked Loop (PLL)
 
 * **Generates stable clock** at 8× reference frequency
 * Components: Phase Frequency Detector, Charge Pump, VCO, Frequency Divider
 * **Benefits:** Reduces jitter, supports multiple frequencies, compensates for temperature/voltage variations
+<br>
+
+<img width="1205" height="712" alt="Screenshot from 2025-10-04 21-26-14" src="https://github.com/user-attachments/assets/70e1a181-b344-4d4b-b87b-2eef12bd9ca9" />
 
 <br>
 
+<a id="id8.3"></a>
 ### Digital-to-Analog Converter (DAC)
 
 * **10-bit resolution (1024 levels)**
 * Implements **R-2R Ladder network** for accurate, scalable conversion
 * Converts CPU output into measurable analog signals
 * Introduces **mixed-signal design considerations:** noise, reference stability, layout precision
+<br>
+
+<img width="934" height="209" alt="Screenshot from 2025-10-04 21-29-15" src="https://github.com/user-attachments/assets/3f224bc7-6e82-47ba-beb8-10f8727b0626" />
+
+<img width="836" height="471" alt="Screenshot from 2025-10-04 21-29-33" src="https://github.com/user-attachments/assets/15b74a24-bfe1-4299-a061-acb917153d3e" />
+
 
 <br>
 
+<a id="id9"></a>
 ## 🧪 Functional Modelling in SoC Design
 
 **Purpose:** Early validation before RTL and physical design.
@@ -263,7 +290,7 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 **Benefits:** Reduces errors, accelerates learning, provides a **golden reference** for RTL verification.
 
 <br>
-
+<a id="id10"></a>
 ## 🎯 Learning Outcomes from BabySoC
 
 1. Understanding **CPU pipeline, registers, and instruction flow**
@@ -274,6 +301,7 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 
 <br>
 
+<a id="id11"></a>
 ## ⚡ Practical Applications
 
 * **Signal Generation:** Test patterns for analog circuits
@@ -283,6 +311,7 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 
 <br>
 
+<a id="id12"></a>
 ## 🏭 Connection to Professional Practice
 
 * Interfacing CPU with peripherals
@@ -294,30 +323,46 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 
 <br>
 
-## 🏁 Conclusion
+<a id="id13"></a>
 
-VSDBabySoC
+## 🧩 VSDBabySoC Architecture
 
+🌟 Introduction
+In the world of chip design, even the simplest SoC can teach us how digital and analog domains come together on silicon.
+VSDBabySoC is a compact educational SoC that integrates three key blocks:
 
-provides a **foundational, hands-on platform** for understanding SoC design, spanning **digital, analog, and mixed-signal domains**.
+🧠 RVMYTH Core – a lightweight RISC-V CPU
+⏱️ 8× PLL – stable clock generation
+🎚 10-bit DAC – digital-to-analog interface
+👉 The mission: test open-source IPs in combination and demonstrate digital-to-analog control on Sky130 technology.
 
-By learning:
-
-* How the **PLL generates stable timing**
-* How the **RISC-V CPU executes instructions**
-* How the **DAC converts digital output to analog signals**
-
-…students gain insights directly applicable to **real-world SoC design**, from microcontrollers to application processors and specialized accelerators.
-
-Mastering these **fundamental concepts** in a manageable platform prepares learners for the **complex SoCs powering modern technology**.
-
+### Block Diagram
+<img width="2270" height="1260" alt="vsdbabysoc_block_diagram" src="https://github.com/user-attachments/assets/0a7c8bf6-a5a9-4f0f-b374-d910cff17d5d" />
 
 
 
 <br>
 
-## 🧩 VSDBabySoC Architecture
+🧩 What Makes Up VSDBabySoC?
+At its heart, VSDBabySoC is a mini-System-on-Chip:
 
+RVMYTH (RISC-V CPU Core) 🧠
+
+Fetches & executes instructions
+Drives output data through register r17
+Phase-Locked Loop (PLL) ⏱️
+
+Generates a clean, stable internal clock from an input source
+Digital-to-Analog Converter (DAC) 🎚
+
+Takes the 10-bit value from the CPU (r17) and outputs a proportional analog voltage
+💡 Concept:
+Think of the CPU as the brain, the PLL as the heartbeat, and the DAC as the voice — all working together to make the chip "speak" in analog.
+
+
+<br>
+
+<a id="id14"></a>
 ## 📂 Project Structure
 
 ```
@@ -382,6 +427,7 @@ VSDBabySoC/
 
 <br>
 
+<a id="id15"></a>
 ## 🛠️ Setup & TL-Verilog Conversion
 
 1. **Clone the Project**
@@ -409,8 +455,10 @@ sandpiper-saas -i ./src/module/*.tlv -o rvmyth.v --bestsv --noline -p verilog --
 
 <br>
 
+<a id="id16"></a>
 ## 🧪 Simulation Flow
 
+<a id="id17"></a>
 ### Pre-Synthesis Simulation
 
 ```bash
@@ -443,6 +491,7 @@ This image shows the terminal and the GTKWave window side by side. The terminal 
 
 <br>
 
+<a id="id18"></a>
 ### Post-Synthesis Simulation
 
 ```bash
@@ -475,7 +524,7 @@ This screenshot shows post-synthesis simulation results for the VSDBabySoC desig
 <img width="1920" height="1080" alt="Screenshot from 2025-10-01 12-19-13" src="https://github.com/user-attachments/assets/1b905394-1d0e-43be-9452-0f82694c0bbb" />
 
 This screenshot shows the synthesis statistics for the "vsdbabysoc" design after running the synthesis tool. It lists detailed information such as the total number of wires (4737), wire bits (6211), and standard cells (5913) used in the synthesized digital circuit. The breakdown includes a count of each type of cell from the Sky130 standard cell library—such as logic gates, flip-flops, multiplexers, and custom blocks like "avsdac" and "avsdp1." These statistics help understand the hardware resource utilization and logic composition of the final synthesized netlist.
-
+<a id="id20"></a>
 
 
 <br>
@@ -487,18 +536,19 @@ This screenshot shows the post-synthesis simulation environment for the VSDBabyS
 
 <br>
 
-
+<a id="id19"></a>
 ### Key Signals to Observe
 
 | Signal         | Description          |
 | -------------- | -------------------- |
-| CLK            | Input clock from PLL |
-| reset          | Reset signal         |
-| OUT            | DAC output           |
-| RV_TO_DAC[9:0] | CPU r17 → DAC input  |
+| ⏱️ CLK            | Input clock from PLL |
+| 🔄 reset          | Reset signal         |
+| 🎚 OUT            | DAC output           |
+| 🔢 RV_TO_DAC[9:0] | CPU r17 → DAC input  |
 
 <br>
 
+<a id="id20"></a>
 ## 🔄 Instruction Program Driving BabySoC
 
 | #   | Instruction      | Action             |
@@ -510,6 +560,8 @@ This screenshot shows the post-synthesis simulation environment for the VSDBabyS
 | ... | ...              | ...                |
 | 12  | BEQ r0, r0, ...  | Infinite loop      |
 
+
+<a id="id21"></a>
 ### Execution Timeline
 
 | Phase       | r17 Value | Behavior           |
@@ -526,6 +578,8 @@ V_{OUT} = \frac{r17}{1023} \times V_{REF_SPAN} \quad (V_{REF_SPAN}=1.0V)
 
 <br>
 
+
+<a id="id22"></a>
 ## 🛠️ Troubleshooting
 
 * ⚠️ **Module Redefinition:** Include files only once
@@ -534,6 +588,7 @@ V_{OUT} = \frac{r17}{1023} \times V_{REF_SPAN} \quad (V_{REF_SPAN}=1.0V)
 
 <br>
 
+<a id="id23"></a>
 ### 💡 Summary
 
 **VSDBabySoC** provides a **hands-on, simplified learning platform** for:
@@ -543,6 +598,26 @@ V_{OUT} = \frac{r17}{1023} \times V_{REF_SPAN} \quad (V_{REF_SPAN}=1.0V)
 * Digital-to-analog interfacing
 * Understanding clock synchronization, instruction execution, and SoC integration
 
+<a id="id23.1"></a>
+## 🏁 Conclusion
+
+VSDBabySoC
+
+
+provides a **foundational, hands-on platform** for understanding SoC design, spanning **digital, analog, and mixed-signal domains**.
+
+By learning:
+
+* How the **PLL generates stable timing**
+* How the **RISC-V CPU executes instructions**
+* How the **DAC converts digital output to analog signals**
+
+…students gain insights directly applicable to **real-world SoC design**, from microcontrollers to application processors and specialized accelerators.
+
+Mastering these **fundamental concepts** in a manageable platform prepares learners for the **complex SoCs powering modern technology**.
+<br>
+
+<a id="id24"></a>
 ## 📚 References
 
 * [RISC-V Specifications](https://riscv.org/specifications/)
