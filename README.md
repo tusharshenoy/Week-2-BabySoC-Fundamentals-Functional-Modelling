@@ -47,10 +47,11 @@
 19. [Key Signals to Observe](#id19)
 20. [Instruction Program Driving BabySoC](#id20)
 21. [Execution Timeline](#id21)
-22. [Troubleshooting](#id22)
-23. [Summary](#id23)
-24. [Conclusion](#id23.1)
-25. [References](#id24)
+22. [Simulation Images](#id21.1)
+23. [Troubleshooting](#id22)
+24. [Summary](#id23)
+25. [Conclusion](#id23.1)
+26. [References](#id24)
 
 <br>
 
@@ -572,13 +573,53 @@ This screenshot shows the post-synthesis simulation environment for the VSDBabyS
 | Final       | 903       | Steady hold        |
 
 **DAC Conversion Formula:**
-[
-V_{OUT} = \frac{r17}{1023} \times V_{REF_SPAN} \quad (V_{REF_SPAN}=1.0V)
-]
+
+V_OUT = (r17 / 1023) × V_REF_SPAN,  where  V_REF_SPAN = 1.0 V
+
+<br>
+
+<a id="id21.1"></a>
+### Simulation Images
+<br>
+
+<img width="1920" height="1080" alt="vsdbabysoc" src="https://github.com/user-attachments/assets/6696be58-2ee1-4545-b0c8-8bda55cac7a7" />
+
+This image shows the top-level simulation of the VSDBabySoC testbench in GTKWave. The 'vsdbabysoc_tb' entity contains hierarchical blocks such as core, dac, and pll. The signals displayed correspond to SoC-level interconnections, enabling verification of integrated system functionality and signal propagation across the full chip.
+
+<br>
+
+<img width="1920" height="1080" alt="uut" src="https://github.com/user-attachments/assets/46fb8e0b-5022-42c4-a281-f350dc5e26e3" />
+
+This image shows GTKWave simulation of the "uut" (unit under test), a mid-level module in the design hierarchy. Signal names cover digital and analog connections to and from the unit, including clock, enable, reference, data bus RV_TO_DAC[9:0], and VCO_IN. The waveform visualization assists in debugging and validating correct module-level interactions prior to full system integration.
+
+
+
+<br>
+
+<img width="1920" height="1080" alt="core" src="https://github.com/user-attachments/assets/6c65d744-6f54-447e-bb0f-0500be831490" />
+
+This screenshot dives deeper into the RISC-V core block's RTL simulation, revealing internal signal activity. It displays a comprehensive set of bus and control signals related to instruction fetch/decode, register addressing, ALU operations, memory interface, and pipeline control. This is key for detailed functional verification of the microprocessor unit before and after synthesis.
+
+<br>
+
+<img width="1920" height="1080" alt="dac" src="https://github.com/user-attachments/assets/4fd1afe3-53ef-457b-983b-9385c55b7a73" />
+This screenshot focuses on the "dac" (Digital-to-Analog Converter) block within the VSDBabySoC simulation. The left pane shows digital input and control signals, such as D[9:0], Dext[10:0], EN, and OUT. The waveform window captures the timing behavior of these signals and the DAC's analog output under digital stimulus, useful for validating digital-to-analog conversion logic and output accuracy.
+
+<br>
+
+<img width="1920" height="1080" alt="pll" src="https://github.com/user-attachments/assets/e6c1c10d-92ea-4e55-bf2a-c44c7def654e" />
+
+This image presents simulation waveforms for the PLL (Phase-Locked Loop) module. Key signals like CLK, ENb_CP, ENb_VCO, VCO_IN, REF, and various real-valued analog signals such as period and lastedge are plotted. This allows assessment of the PLL's frequency generation, locking behavior, and timing characteristics with respect to input reference and feedback signals.
+
+<br>
+
+These images together document hierarchical and subsystem-specific verification steps, allowing observation and debugging of all major blocks and their interactions in the VSDBabySoC project.
 
 <br>
 
 
+
+<br>
 <a id="id22"></a>
 ## 🛠️ Troubleshooting
 
