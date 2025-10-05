@@ -279,6 +279,7 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 <br>
 
 <a id="id9"></a>
+
 ## 🧪 Functional Modelling in SoC Design
 
 **Purpose:** Early validation before RTL and physical design.
@@ -291,7 +292,9 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 **Benefits:** Reduces errors, accelerates learning, provides a **golden reference** for RTL verification.
 
 <br>
+
 <a id="id10"></a>
+
 ## 🎯 Learning Outcomes from BabySoC
 
 1. Understanding **CPU pipeline, registers, and instruction flow**
