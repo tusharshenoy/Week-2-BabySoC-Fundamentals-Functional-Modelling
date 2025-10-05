@@ -329,6 +329,7 @@ Reference Clock → [ PLL ] → [ RVMYTH CPU ] → r17 → [ 10-bit DAC ] → An
 ## 🧩 VSDBabySoC Architecture
 
 🌟 Introduction
+
 In the world of chip design, even the simplest SoC can teach us how digital and analog domains come together on silicon.
 VSDBabySoC is a compact educational SoC that integrates three key blocks:
 
@@ -345,6 +346,7 @@ VSDBabySoC is a compact educational SoC that integrates three key blocks:
 <br>
 
 🧩 What Makes Up VSDBabySoC?
+
 At its heart, VSDBabySoC is a mini-System-on-Chip:
 
 RVMYTH (RISC-V CPU Core) 🧠
